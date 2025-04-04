@@ -1,4 +1,8 @@
 import type { MetadataRoute } from 'next';
+import { siteConfig } from '@/src/configs/config';
+
+// Add this export for static site generation
+export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -14,8 +18,8 @@ export default function robots(): MetadataRoute.Robots {
       }
     ],
     sitemap: [
-      'https://muhammadfiaz.com/sitemap.xml', // First sitemap URL
-      'https://muhammadfiaz.com/sitemap-0.xml' // Second sitemap URL
+      `${siteConfig.baseUrl}/sitemap.xml`, // First sitemap URL
+      `${siteConfig.baseUrl}/sitemap-0.xml` // Second sitemap URL
     ]
   };
 }

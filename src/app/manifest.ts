@@ -2,6 +2,9 @@
 import type { MetadataRoute } from 'next';
 import { siteConfig } from '@/src/configs/config';
 
+// Add these exports to make the file compatible with static exports
+export const dynamic = 'force-static';
+
 // The manifest function returns a metadata object conforming to the MetadataRoute.Manifest type
 export default function manifest(): MetadataRoute.Manifest {
   return {

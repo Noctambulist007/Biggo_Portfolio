@@ -47,9 +47,9 @@ const Credits = () => {
                 label="Twitter"
               />
             )}
-            {siteConfig.email && (
+            {siteConfig.social.email && (
               <SocialLink 
-                href={`mailto:${siteConfig.email}`}
+                href={`mailto:${siteConfig.social.email}`}
                 icon={<FaEnvelope className="text-xl" />}
                 label="Email"
               />

@@ -22,6 +22,7 @@ validateOptionalEnvVars();
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: 'export',  // Configure static exports
   images: {
     domains: ['localhost'],
     remotePatterns: [
@@ -104,6 +105,7 @@ const nextConfig: NextConfig = {
         pathname: '/**'
       }
     ],
+    unoptimized: true,  // Required for static export
     dangerouslyAllowSVG: true // Allow SVG images
   }
 };
