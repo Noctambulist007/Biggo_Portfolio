@@ -12,18 +12,38 @@ import Script from 'next/script';
 import { usePathname } from 'next/navigation';
 import SearchInput from '@/src/components/ui/SearchInput';
 
-const ProjectsSection = () => {
+interface ProjectsSectionProps {
+  staticProjects?: CardProjectProps[];
+}
+
+const ProjectsSection = ({ staticProjects }: ProjectsSectionProps) => {
   const [projectSearch, setProjectSearch] = useState<string>('');
   const [allProjectsInfo, setAllProjectsInfo] = useState<CardProjectProps[]>(
-    []
+    staticProjects || []
   );
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(staticProjects ? false : true);
   const [fetchError, setFetchError] = useState<string>(''); // New state for handling fetch errors
 
   const pathname = usePathname(); // Hook to track the current path
 
   // Fetch GitHub repositories when the component mounts or when the search or pathname changes
   useEffect(() => {
+    // If static projects are provided, filter them based on search
+    if (staticProjects) {
+      const filteredProjects = staticProjects.filter((project) => {
+        const searchLower = projectSearch.toLowerCase();
+        return (
+          project.title.toLowerCase().includes(searchLower) ||
+          project.des.toLowerCase().includes(searchLower) ||
+          project.category.toLowerCase().includes(searchLower) ||
+          project.topics.some((topic) => topic.toLowerCase().includes(searchLower))
+        );
+      });
+      setAllProjectsInfo(filteredProjects);
+      return;
+    }
+
+    // Otherwise fetch projects from API
     const fetchProjects = async () => {
       setIsLoading(true);
       setFetchError(''); // Reset error message before fetching
@@ -47,7 +67,7 @@ const ProjectsSection = () => {
     };
 
     fetchProjects();
-  }, [projectSearch, pathname]); // Re-run when either the projectSearch or pathname changes
+  }, [projectSearch, pathname, staticProjects]); // Re-run when either the projectSearch or pathname changes
 
   // Generate JSON-LD structured data for each individual project
   const generateJsonLdForProject = (project: CardProjectProps) => {
@@ -77,18 +97,9 @@ const ProjectsSection = () => {
 
           <AnimationContainer customClassName="w-full flex flex-col gap-5 mb-8">
             <p className="w-full text-base text-black dark:text-white">
-              These are most of the projects I've done since I started
-              programming, some of them are personal projects, freelance, work,
-              practice, or for other situations. If you want to see absolutely
-              all my projects, go to my{' '}
-              <Link
-                href={`https://github.com/${siteConfig.social.github}`}
-                target="_blank"
-                className="underline transition-all ease"
-              >
-                github page
-              </Link>
-              .
+              These are some of the projects I've worked on, showcasing my skills in mobile application 
+              development and machine learning. My projects focus on healthcare applications, clean 
+              architecture, and innovative solutions using Flutter and Python.
             </p>
           </AnimationContainer>
 

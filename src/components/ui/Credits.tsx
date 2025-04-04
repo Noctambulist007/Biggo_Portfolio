@@ -1,91 +1,77 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { siteConfig } from '@/src/configs/config';
 import AnimationContainer from '@/src/components/utils/AnimationContainer';
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaHeart } from 'react-icons/fa';
 
 const Credits = () => {
-  const [repoStats, setRepoStats] = useState({ stars: 0, forks: 0 });
-
-  // Fetch repository stats
-  useEffect(() => {
-    const fetchRepoStats = async () => {
-      try {
-        const response = await fetch(
-          `https://api.github.com/repos/${siteConfig.social.github}/portfolio`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setRepoStats({
-            stars: data.stargazers_count || 0,
-            forks: data.forks_count || 0
-          });
-        } else {
-          console.error('Error fetching GitHub data:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Failed to fetch repo stats:', error);
-      }
-    };
-
-    fetchRepoStats();
-  }, []);
-
   return (
-    <AnimationContainer customClassName="text-center py-4 dark:text-white/50 text-black/50 text-sm  ">
-      <p>
-        Built with ❤️ by{' '}
-        <Link
-          href={siteConfig.baseUrl}
-          className="text-blue-500 hover:underline"
-        >
-          {siteConfig.author}
-        </Link>
-        . All rights reserved © {new Date().getFullYear()}.
-      </p>
-      <div className="flex justify-center items-center gap-4 mt-2">
-        <Link
-          href={`https://github.com/${siteConfig.social.github}/portfolio/stargazers`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-blue-500 hover:underline justify-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 32 32"
-            className="mb-1"
-          >
-            <path
-              fill="currentColor"
-              d="m30.336 12.547l-10.172-1.074L16 2.133l-4.164 9.34l-10.172 1.074l7.598 6.848L7.14 29.398L16 24.29l8.86 5.11l-2.122-10.004z"
-            />
-          </svg>
-          <span>{repoStats.stars}</span> Stars
-        </Link>
-        <Link
-          href={`https://github.com/${siteConfig.social.github}/portfolio/fork`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-blue-500 hover:underline justify-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 32 32"
-            className="mb-1"
-          >
-            <path
-              fill="currentColor"
-              d="M11 4C9.355 4 8 5.355 8 7c0 1.293.844 2.395 2 2.813v12.374c-1.156.418-2 1.52-2 2.813c0 1.645 1.355 3 3 3s3-1.355 3-3c0-1.27-.816-2.344-1.938-2.781c.145-1.23.622-1.836 1.376-2.344c.898-.605 2.277-.965 3.78-1.313c1.505-.347 3.118-.707 4.47-1.656c1.187-.832 2.085-2.195 2.28-4.093C25.142 12.402 26 11.3 26 10c0-1.645-1.355-3-3-3s-3 1.355-3 3c0 1.277.832 2.352 1.969 2.781c-.137 1.313-.645 1.965-1.407 2.5c-.898.63-2.285 1-3.78 1.344c-1.497.344-3.118.648-4.47 1.563c-.109.074-.21.167-.312.25V9.813c1.156-.418 2-1.52 2-2.813c0-1.645-1.355-3-3-3zm0 2c.563 0 1 .438 1 1c0 .563-.438 1-1 1c-.563 0-1-.438-1-1c0-.563.438-1 1-1zm12 3c.563 0 1 .438 1 1c0 .563-.438 1-1 1c-.563 0-1-.438-1-1c0-.563.438-1 1-1zM11 24c.563 0 1 .438 1 1c0 .563-.438 1-1 1c-.563 0-1-.438-1-1c0-.563.438-1 1-1z"
-            />
-          </svg>
-          <span>{repoStats.forks}</span> Forks
-        </Link>
+    <AnimationContainer customClassName="w-full py-6 bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-900">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex flex-col items-center md:items-start">
+            <p className="text-base font-medium">
+              Built with <FaHeart className="inline text-red-500 mx-1" /> by{' '}
+              <Link
+                href={siteConfig.baseUrl}
+                className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 hover:underline"
+              >
+                {siteConfig.author}
+              </Link>
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              All rights reserved © {new Date().getFullYear()}
+            </p>
+          </div>
+          
+          <div className="flex gap-4">
+            {siteConfig.social.github && (
+              <SocialLink 
+                href={`https://github.com/${siteConfig.social.github}`}
+                icon={<FaGithub className="text-xl" />}
+                label="GitHub"
+              />
+            )}
+            {siteConfig.social.linkedin && (
+              <SocialLink 
+                href={`https://linkedin.com/in/${siteConfig.social.linkedin}`}
+                icon={<FaLinkedin className="text-xl" />}
+                label="LinkedIn"
+              />
+            )}
+            {siteConfig.social.twitter && (
+              <SocialLink 
+                href={`https://twitter.com/${siteConfig.social.twitter}`}
+                icon={<FaTwitter className="text-xl" />}
+                label="Twitter"
+              />
+            )}
+            {siteConfig.email && (
+              <SocialLink 
+                href={`mailto:${siteConfig.email}`}
+                icon={<FaEnvelope className="text-xl" />}
+                label="Email"
+              />
+            )}
+          </div>
+        </div>
       </div>
     </AnimationContainer>
+  );
+};
+
+const SocialLink = ({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) => {
+  return (
+    <Link
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+      aria-label={label}
+    >
+      {icon}
+    </Link>
   );
 };
 

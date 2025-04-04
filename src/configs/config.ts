@@ -45,39 +45,38 @@ export const siteConfig: {
     type: string;
   };
 } = {
-  baseUrl: 'https://muhammadfiaz.com',
-  domain: 'muhammadfiaz.com',
-  author: 'Muhammad Fiaz',
-  author_surname: 'Fiaz',
-  titlePrefix: 'Muhammad Fiaz',
-  github_org_name: 'Fiaz Technologies',
-  country: 'India',
-  profile_image:
-    'https://avatars.githubusercontent.com/u/75434191?s=400&u=0aa88e4ae941c44425b2be4595cf92b68f578f8a&v=4',
+  baseUrl: 'https://portfolio-biggo.com',
+  domain: 'portfolio-biggo.com',
+  author: 'Biggo Bushon Routh',
+  author_surname: 'Routh',
+  titlePrefix: 'Biggo Bushon Routh',
+  github_org_name: 'EzyCourse',
+  country: 'Bangladesh',
+  profile_image: '/images/biggo-demo.jpeg',
   form_id: 'https://formspree.io/f/myzynpbr',
   social: {
-    kofi: 'https://ko-fi.com/muhammadfiaz',
-    sponsor: 'https://github.com/sponsors/muhammad-fiaz',
-    email: 'contact@muhammadfiaz.com',
-    twitter: '@muhammadfiaz_',
-    github: 'muhammad-fiaz',
-    linkedin: 'https://www.linkedin.com/in/muhammad-fiaz-/',
-    blog: 'https://articles.muhammadfiaz.com',
-    medium: 'https://muhammad-fiaz.medium.com',
-    dev: 'https://dev.to/muhammadfiaz',
-    hashnode: 'https://muhammadfiaz.hashnode.dev',
+    kofi: 'https://ko-fi.com/biggorouth',
+    sponsor: 'https://github.com/sponsors/Biggo111',
+    email: 'routh.biggo123@gmail.com',
+    twitter: '@BiggoBushon',
+    github: 'Biggo111',
+    linkedin: 'https://www.linkedin.com/in/biggo-bushon-routh/',
+    blog: 'https://portfolio-biggo.com/blog',
+    medium: 'https://medium.com/@biggo-routh',
+    dev: 'https://dev.to/biggo111',
+    hashnode: 'https://hashnode.com/@Biggo111',
     discord: 'https://discord.gg/mXMhy2EX',
-    github_organisation: 'https://github.com/FiazTechnologies',
+    github_organisation: 'https://github.com/EzyCourse',
     daily_dev: {
-      username: 'muhammadfiaz',
+      username: 'biggorouth',
       card: 'https://api.daily.dev/devcards/v2/JVyK3ICBzKPdM0rcDj1o4.png?type=wide&r=vde'
     },
-    holopin: 'muhammadfiaz'
+    holopin: 'biggorouth'
   },
   metadata: {
-    description: `Hi! I'm Muhammad Fiaz, a Full Stack developer passionate about building apps, exploring AI and ML, and collaborating on exciting projects. Let's connect!`,
+    description: `Hi! I'm Biggo Bushon Routh, a Software Engineer at EzyCourse, specializing in mobile application development with nearly a year of professional experience. Alongside my software engineering role, I am a research assistant at Intex Research Lab, where my work focuses on thesis-based projects leveraging machine learning, deep learning, and image processing.`,
     keywords:
-      'Muhammad Fiaz, Full Stack Developer, Muhammad Fiaz portfolio, Muhammad Fiaz GitHub, Web Development, Mobile Applications, Machine Learning, Artificial Intelligence, Programming Languages, Open Source Developer, App Development',
+      'Biggo Bushon Routh, Software Engineer, Mobile Development, Machine Learning, Deep Learning, Image Processing, Flutter, AI, Healthcare, EzyCourse, Intex Research Lab',
     type: 'website'
   },
   chatbot: {
@@ -91,6 +90,6 @@ export const siteConfig: {
     hacktoberfest: 'https://hacktoberfest.com/',
     codsoft: 'https://www.codsoft.in/',
     github_snake:
-      'https://raw.githubusercontent.com/muhammad-fiaz/muhammad-fiaz/output/github-contribution-grid-snake.svg'
+      'https://raw.githubusercontent.com/Biggo111/Biggo111/output/github-contribution-grid-snake.svg'
   }
 };

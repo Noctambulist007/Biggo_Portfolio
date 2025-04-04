@@ -2,13 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import AnimationContainer from '../utils/AnimationContainer';
 import { siteConfig } from '@/src/configs/config';
-import { Button, Input, Textarea } from '@nextui-org/react';
 import SectionHeader from '@/src/components/ui/SectionHeader';
+import Link from 'next/link';
+import { FaGithub, FaLinkedin, FaTwitter, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
 
 const ContactMe = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [phone, setPhone] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
   const [waitTime, setWaitTime] = useState(0); // In seconds
   const [userInfo, setUserInfo] = useState<any>({});
@@ -89,142 +92,246 @@ const ContactMe = () => {
       <SectionHeader
         id="contactme"
         title="Contact Me"
-        content="Fill out the form below to contact me. Please, no spam. I strive to respond to all legitimate inquiries, but please be clear and concise in your message. Whether you have a question about my work, a project collaboration, or just want to connect, feel free to reach out. I look forward to hearing from you!"
+        content="Have a question or want to work together? Feel free to reach out!"
       />
 
-      <div className="w-full flex justify-between items-center flex-col mx-auto max-w-screen-xl">
-        <div className="w-full flex justify-between items-center flex-col lg:flex-row gap-6 mb-10">
-          <div className="w-full rounded-xl border border-gray-800 hover:border-gray-900 bg-white dark:bg-[#080809] p-4 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] sm:p-6 transition ease">
-            <h3 className="font-bold text-1xl tracking-tight text-foreground dark:text-white text-start">
-              Email
-            </h3>
-            <p className="text-base mt-2 text-foreground dark:text-white">
-              {siteConfig.social.email}
-            </p>
+      <div className="w-full flex flex-col mx-auto max-w-screen-xl mt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Contact Info */}
+          <div className="lg:col-span-4">
+            <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 h-full">
+              <h3 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#FF004F] to-[#FF004F]/70">
+                Contact Information
+              </h3>
+              
+              <div className="space-y-6">
+                <div className="space-y-5">
+                  <ContactCard 
+                    icon={<FaEnvelope className="h-5 w-5 text-[#FF004F] dark:text-[#FF004F]" />}
+                    title="Email"
+                    value={siteConfig.social.email}
+                    link={`mailto:${siteConfig.social.email}`}
+                  />
+                  
+                  <ContactCard 
+                    icon={<FaPhone className="h-5 w-5 text-[#FF004F] dark:text-[#FF004F]" />}
+                    title="Phone"
+                    value="+880-172-980-7254"
+                    link="tel:+8801729807254"
+                  />
+                  
+                  <ContactCard 
+                    icon={<FaMapMarkerAlt className="h-5 w-5 text-[#FF004F] dark:text-[#FF004F]" />}
+                    title="Location"
+                    value="Sylhet, Sylhet Sadar - 3100"
+                    subtitle="Bangladesh"
+                  />
+                </div>
+              </div>
+              
+              {/* Social Links */}
+              <div className="mt-8">
+                <h4 className="text-sm font-semibold uppercase text-gray-500 dark:text-gray-300 mb-4">
+                  CONNECT WITH ME
+                </h4>
+                <div className="flex space-x-4">
+                  <Link 
+                    href={`https://github.com/${siteConfig.social.github}`} 
+                    target="_blank"
+                    className="p-3 bg-white dark:bg-gray-700 rounded-full transition-all duration-200 transform hover:-translate-y-1"
+                  >
+                    <FaGithub className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+                  </Link>
+                  <Link 
+                    href={siteConfig.social.linkedin} 
+                    target="_blank"
+                    className="p-3 bg-white dark:bg-gray-700 rounded-full transition-all duration-200 transform hover:-translate-y-1"
+                  >
+                    <FaLinkedin className="h-5 w-5 text-[#0A66C2]" />
+                  </Link>
+                  <Link 
+                    href={`https://twitter.com/${siteConfig.social.twitter}`} 
+                    target="_blank"
+                    className="p-3 bg-white dark:bg-gray-700 rounded-full transition-all duration-200 transform hover:-translate-y-1"
+                  >
+                    <FaTwitter className="h-5 w-5 text-[#1DA1F2]" />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className="w-full flex justify-center items-center flex-col">
-          <form
-            onSubmit={handleSubmit}
-            className="w-full space-y-4"
-            method="POST"
-            encType="multipart/form-data"
-          >
-            <div>
-              <Input
-                isClearable={true}
-                label="Name"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
+          {/* Contact Form */}
+          <div className="lg:col-span-8">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+              <h3 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#FF004F] to-[#FF004F]/70">
+                Send a Message
+              </h3>
+              
+              {isSubmitted ? (
+                <div className="text-center py-10">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-100 dark:bg-green-900 mb-4">
+                    <svg className="h-7 w-7 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="text-xl font-semibold mb-2">Message Sent!</h4>
+                  <p className="text-gray-600 dark:text-gray-400">Thank you for your message. I'll get back to you soon!</p>
+                </div>
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  className="w-full space-y-5"
+                  method="POST"
+                  encType="multipart/form-data"
+                >
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF004F] dark:bg-gray-700"
+                      placeholder="Enter your name"
+                      required
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-5">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF004F] dark:bg-gray-700"
+                        placeholder="Enter your email"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF004F] dark:bg-gray-700"
+                        placeholder="Enter your phone number"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      rows={4}
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF004F] dark:bg-gray-700"
+                      placeholder="Enter your message"
+                      required
+                    ></textarea>
+                  </div>
+
+                  {siteConfig.contact.debug && (
+                    <input
+                      type="hidden"
+                      name="userInfo"
+                      value={JSON.stringify(userInfo)}
+                    />
+                  )}
+
+                  <div className="flex justify-end">
+                    <button
+                      type="submit"
+                      disabled={isWaiting}
+                      className="px-6 py-3 bg-gradient-to-r from-[#FF004F] to-[#FF004F]/80 text-white font-medium rounded-lg flex items-center"
+                    >
+                      <span>Send Message</span>
+                      <svg
+                        className="w-5 h-5 ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {isWaiting && (
+                    <div className="text-yellow-500 text-sm mt-3">
+                      Please wait {waitTime} seconds before sending another message.
+                    </div>
+                  )}
+                </form>
+              )}
             </div>
-
-            <div className="grid grid-cols-1 gap-4 lg:gap-8 sm:grid-cols-2">
-              <div>
-                <Input
-                  isClearable={true}
-                  label="Email"
-                  placeholder="Enter your email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div>
-                <Input
-                  isClearable={true}
-                  label="Phone"
-                  placeholder="Enter your phone number"
-                  type="tel"
-                  required
-                />
-              </div>
-            </div>
-
-            <div>
-              <Textarea
-                isClearable={true}
-                label="Message"
-                placeholder="Enter your message"
-                rows={4}
-                required
-              />
-            </div>
-
-            {siteConfig.contact.debug && (
-              <div>
-                <Input
-                  type="hidden"
-                  name="userInfo"
-                  value={JSON.stringify(userInfo)}
-                  required
-                />
-              </div>
-            )}
-
-            <Button
-              type="submit"
-              className="flex items-center justify-center rounded-xl px-5 py-3 text-white dark:text-black bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 shadow-sm transition ease mx-auto"
-            >
-              <span className="font-medium text-base">Send</span>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="ml-3 h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </Button>
-          </form>
-
-          {/* Show warning message if the user tries to submit before waiting */}
-          {isWaiting && (
-            <div className="mt-4 text-red-500">
-              <p>
-                You need to wait {waitTime} second{waitTime !== 1 && 's'} before
-                sending another message.
-              </p>
-            </div>
-          )}
+          </div>
         </div>
       </div>
-
-      {/* Success Popup */}
-      {isSubmitted && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg text-center">
-            <h3 className="font-bold text-lg text-foreground dark:text-white mb-4">
-              Thank you, {name}!{' '}
-              <span className="text-black dark:text-white">🎉</span>
-            </h3>
-            <p className="text-base text-foreground dark:text-gray-400">
-              Your message has been sent to {siteConfig.social.email}{' '}
-              successfully.
-            </p>
-            <Button
-              onPress={() => setIsSubmitted(false)}
-              className="mt-4 px-4 py-2 rounded-xl bg-black text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition ease"
-            >
-              Close
-            </Button>
-          </div>
-        </div>
-      )}
     </AnimationContainer>
   );
+};
+
+// Contact Card Component
+const ContactCard = ({ 
+  icon, 
+  title, 
+  value, 
+  subtitle,
+  link 
+}: { 
+  icon: React.ReactNode; 
+  title: string; 
+  value: string;
+  subtitle?: string;
+  link?: string;
+}) => {
+  const content = (
+    <div className="group flex items-start space-x-3">
+      <div className="bg-white dark:bg-gray-700 p-2.5 rounded-full flex-shrink-0">
+        {icon}
+      </div>
+      <div className="flex-1 min-w-0">
+        <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase">{title}</h4>
+        <p className="font-medium text-sm truncate text-gray-800 dark:text-white">{value}</p>
+        {subtitle && <p className="text-sm text-gray-500 dark:text-gray-300">{subtitle}</p>}
+      </div>
+    </div>
+  );
+
+  if (link) {
+    return (
+      <Link href={link} className="block group hover:opacity-80 transition-opacity">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 };
 
 export default ContactMe;

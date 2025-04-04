@@ -12,64 +12,66 @@ export interface ExperienceEntry {
 
 export const experienceEntries: ExperienceEntry[] = [
   {
-    title: 'Looking for Job Opportunities | Present',
+    title: 'Software Engineer L2 | July. 2023 - Present',
     description:
-      "Currently seeking job opportunities in **Software Engineering**, **AI**, **Data Science**, and **Full Stack** development. Open to full-time roles, internships, or freelance work. Let's connect!",
-    startDate: 'Present',
+      'Develop and maintain the Ezycourse mobile application, focusing on scalability, efficiency, issue resolution, and enhancing user experience, while collaborating with teams to implement new features.',
+    startDate: 'July 2023',
     endDate: 'Present',
     isActive: true,
-    companyUrl: siteConfig.social.linkedin
+    companyUrl: 'https://ezycourse.com'
   },
   {
-    title: 'Fiaz Technologies | Nov. 2023 - Present',
+    title: 'Undergraduate Research Assistant | Sep. 2023 - Present',
     description:
-      'Building developer-first tools at Fiaz Technologies to enhance productivity. Focused on creating innovative Tools that empower developers.',
-    startDate: 'Nov 2023',
+      'Conduct research on machine learning and deep learning at Intex Research Lab. Assist in thesis projects by collaborating with senior researchers to design and implement models, contributing to research papers. Continuously stay informed on the latest developments in ML and DL technologies.',
+    startDate: 'Sep 2023',
     endDate: 'Present',
     isActive: true,
-    companyUrl: siteConfig.social.github_organisation
+    companyUrl: 'https://intexresearchlab.com'
   },
   {
-    title: 'Hacktoberfest 2024 | Oct. 2024 - Nov. 2024',
+    title: 'IEEE CS BDC Summer Symposium | Jan. 2023',
     description:
-      'Participated as a maintainer and content writer in the Hacktoberfest event. Contributed to open-source projects and wrote technical content on platforms such as Medium, Dev.to, and Hashnode.',
-    startDate: 'Oct 2024',
-    endDate: 'Nov 2024',
+      'Presented an extended abstract of my thesis at the IEEE CS BDC Summer Symposium 2023, Islamic University, Kushtia, Bangladesh (Paper ID: 162), gaining valuable insights and sharing my research with experts and peers.',
+    startDate: 'Jan 2023',
+    endDate: 'Jan 2023',
     isActive: false,
-    companyUrl: siteConfig.other.hacktoberfest
+    companyUrl: 'https://ieee.org'
   },
   {
-    title: 'CodSoft - Data Science Intern | Sep. 2023 - Oct. 2023',
+    title: 'IEEE IEMCON 2022 Presenter | Oct. 2022',
     description:
-      'Self-paced Data Science Intern where I gained practical experience in data science applications using Python. I also contributed to open-source projects and maintained repositories on GitHub.',
-    startDate: 'Sep 2023',
-    endDate: 'Oct 2023',
-    companyUrl: siteConfig.other.codsoft
+      'My co-authors and I successfully presented our paper titled "Performance Analysis of Machine Learning Algorithms in Chronic Kidney Disease Prediction" at the 2022 IEEE IEMCON.',
+    startDate: 'Oct 2022',
+    endDate: 'Oct 2022',
+    isActive: false,
+    companyUrl: 'https://ieee.org'
   },
   {
-    title: 'Hacktoberfest 2023 | Sep. 2023 - Oct. 2023',
+    title: 'Code Samurai Hackathon Participant | Dec. 2022',
     description:
-      'Participated as a maintainer and content writer in the Hacktoberfest event. Contributed to open-source projects and wrote technical content on platforms such as Medium, Dev.to, and Hashnode.',
-    startDate: 'Sep 2023',
-    endDate: 'Oct 2023',
-    companyUrl: siteConfig.other.hacktoberfest
+      'My team placed 27th nationwide in the preliminary round of the Code Samurai Hackathon 2022, out of around 500 teams. We qualified for the finals at Dhaka University, where we presented our project and gained valuable experience.',
+    startDate: 'Dec 2022',
+    endDate: 'Dec 2022',
+    isActive: false,
+    companyUrl: 'https://codesamurai.org'
   },
   {
-    title: 'Technical Content Writer | Sep. 2023 - Present',
+    title: 'Secretary, IEEE Computer Society LU SB Chapter | May. 2023 - Sep. 2024',
     description:
-      'Writing technical content and tutorials on platforms like Medium, Dev.to, and Hashnode. Topics include software development, data science, and open-source contributions.',
-    startDate: 'Sep 2023',
-    endDate: 'Present',
-    isActive: true,
-    companyUrl: siteConfig.baseUrl + '/blog'
+      'Organized events such as seminars and webinars, leading content writing and operations teams. Strengthened my network while enhancing leadership and communication skills.',
+    startDate: 'May 2023',
+    endDate: 'Sep 2024',
+    isActive: false,
+    companyUrl: 'https://ieee.org'
   },
   {
-    title: 'Open Source Contributor & Maintainer | Dec. 2020 - Present',
+    title: 'Bachelor of Science in Computer Science and Engineering | Jan. 2020 - Dec. 2023',
     description:
-      'Actively contributing to and maintaining open-source repositories on GitHub. Focused on building and improving tools for the developer community.',
-    startDate: 'Dec 2020',
-    endDate: 'Present',
-    isActive: true,
-    companyUrl: siteConfig.social.github
+      'Leading University, Sylhet, Bangladesh. Final grade: 3.65 out of 4 | Type of credits: Bangladesh Credit System | Number of credits: 152',
+    startDate: 'Jan 2020',
+    endDate: 'Dec 2023',
+    isActive: false,
+    companyUrl: 'https://lus.ac.bd'
   }
 ];

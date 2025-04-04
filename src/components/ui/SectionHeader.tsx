@@ -11,7 +11,7 @@ const Section: React.FC<SectionProps> = ({ title, content, id }) => {
   return (
     <div className="w-full my-8">
       <h2
-        className="font-semibold text-2xl md:text-3xl tracking-tight mb-4 md:mb-6 text-gray-900 dark:text-gray-100 text-center"
+        className="font-semibold text-2xl md:text-3xl tracking-tight mb-4 md:mb-6 text-[#FF004F] dark:text-[#FF004F] text-center"
         id={id}
       >
         {title}

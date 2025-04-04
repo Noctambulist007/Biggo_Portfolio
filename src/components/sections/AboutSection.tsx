@@ -6,8 +6,6 @@ import TitleSectionPageContainer from '../utils/TitleSectionPageContainer';
 import SectionContainer from '../utils/SectionContainer';
 import Link from 'next/link';
 import ContactMe from '@/src/components/content/ContactMe';
-import SupportMe from '@/src/components/content/SupportMe';
-import FAQSection from '@/src/components/sections/FAQSection';
 import SkillsSection from '@/src/components/sections/SkillsSection';
 
 const AboutSection = () => {
@@ -18,51 +16,40 @@ const AboutSection = () => {
 
         <AnimationContainer customClassName="w-full flex flex-col gap-5 mb-8">
           <p className="text-base text-gray-600 dark:text-gray-400">
-            Hey there! 👋 I'm <strong>{siteConfig.author}</strong>, a Full Stack
-            developer who loves to create new things. I have uploaded some
-            pretty cool stuff, so make sure to check it out on my
-            <Link
-              href={`https://github.com/${siteConfig.social.github}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white hover:underline transition-all ease"
-            >
-              GitHub profile
-            </Link>{' '}
-            ✌️.
+            Hey there! 👋 I'm <strong>{siteConfig.author}</strong>, a Software Engineer at EzyCourse, specializing in mobile 
+            application development with nearly a year of professional experience. Alongside my software 
+            engineering role, I am a research assistant at Intex Research Lab, where my work focuses on 
+            thesis-based projects leveraging machine learning, deep learning, and image processing.
           </p>
 
           <ul className="text-base text-gray-600 dark:text-gray-400 list-disc pl-6 space-y-2 mt-4">
             <li>
-              ✨ I spend my spare time building and developing free Apps and Web
-              Applications because I want to continue growing and honing my
-              skills 😄.
+              🎓 I graduated with a Bachelor of Science in Computer Science and Engineering from Leading University, 
+              Sylhet, Bangladesh with a final grade of 3.65 out of 4.
             </li>
             <li>
-              📚 I'm currently focused on learning and exploring the exciting
-              fields of Machine Learning (ML) and Artificial Intelligence (AI),
-              including neural networks and other related topics.
+              🔬 My research work has led to publications in areas like skin cancer classification and chronic 
+              kidney disease prediction using machine learning algorithms.
             </li>
             <li>
-              🤝 I'm always excited to collaborate with others and contribute to
-              different projects. If you have a project that needs an extra set
-              of hands or fresh ideas, feel free to reach out to me!
+              📱 At EzyCourse, I develop and maintain mobile applications, focusing on scalability, efficiency, 
+              issue resolution, and enhancing user experience.
             </li>
             <li>
-              🔧 I have experience working with various programming languages
-              and technologies, ensuring that I can adapt and contribute
-              effectively to your project's tech stack.
+              🤖 As a research assistant at Intex Research Lab, I conduct research on machine learning and deep learning, 
+              assisting in thesis projects by collaborating with senior researchers.
             </li>
             <li>
-              📬 If you come across anything interesting in my projects or have
-              a project you'd like me to collaborate on, please don't hesitate
-              to get in touch. Let's create something awesome together!
+              🧠 I'm passionate about exploring innovative applications of AI in healthcare, contributing to both 
+              practical software solutions and academic research.
             </li>
           </ul>
 
           <p className="text-base text-gray-600 dark:text-gray-400 mt-4">
-            Feel free to explore my projects and get in touch for
-            collaborations!
+            I'm skilled in various programming languages including C, C++, Java, Python, Dart, Swift, and Kotlin, 
+            and have experience with frameworks like Flutter and Swift UI. If you're interested in collaborating 
+            on research in machine learning, AI applications in healthcare, or mobile application development, 
+            feel free to reach out!
           </p>
         </AnimationContainer>
         <AnimationContainer customClassName="w-full ">
@@ -75,15 +62,6 @@ const AboutSection = () => {
         {/* Contact Section */}
         <AnimationContainer customClassName="w-full mt-16">
           <ContactMe />
-        </AnimationContainer>
-        {/* Support Me Section */}
-        <AnimationContainer customClassName="w-full mt-16">
-          <SupportMe />
-        </AnimationContainer>
-
-        {/* FAQ Section */}
-        <AnimationContainer customClassName="w-full mt-16">
-          <FAQSection />
         </AnimationContainer>
       </div>
     </SectionContainer>

@@ -1,17 +1,41 @@
 import { siteConfig } from '@/src/configs/config';
 
-const GITHUB_USERNAME = siteConfig.social.github;
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+// Static projects data to avoid using GitHub API
+const staticProjects = [
+  {
+    id: '1',
+    title: 'Skin Lesion Detector',
+    des: "This project's main feature is to detect skin lesions among seven types. The machine learning model identifies the type, and the app receives the response via API.",
+    category: 'flutter',
+    repo: 'https://github.com/Biggo111/skin-lesion-detector',
+    link: 'https://github.com/Biggo111/skin-lesion-detector',
+    topics: ['Flutter', 'Machine Learning', 'FastAPI', 'Healthcare', 'AI']
+  },
+  {
+    id: '2',
+    title: 'Machine Learning Basics',
+    des: 'This repository contains several machine learning projects, with a focus on healthcare and data analysis, including Diabetes Prediction System, Cardiovascular Disease Prediction System, Linear Regression Exercises, and Experimenting Principal Component Analysis (PCA).',
+    category: 'python',
+    repo: 'https://github.com/Biggo111/machine-learning-basics',
+    link: 'https://github.com/Biggo111/machine-learning-basics',
+    topics: ['Python', 'Machine Learning', 'Data Analysis', 'Healthcare', 'Pandas', 'NumPy', 'Scikit-learn']
+  },
+  {
+    id: '3',
+    title: 'Social Feed App',
+    des: 'Demonstrates clean architecture with a focus on REST API (mock), dependency injection, and state management using Riverpod. Distinction between UI and business logic, modular code.',
+    category: 'flutter',
+    repo: 'https://github.com/Biggo111/social-feed-app',
+    link: 'https://github.com/Biggo111/social-feed-app',
+    topics: ['Flutter', 'Riverpod', 'Clean Architecture', 'REST API', 'Mobile']
+  }
+];
 
-if (!GITHUB_TOKEN) {
-  throw new Error('GitHub token is not defined in .env.local');
-}
-
-// In-memory cache to store repository data
+// In-memory cache for static data
 let cache: {
   data: any;
   timestamp: number;
-} = { data: null, timestamp: 0 };
+} = { data: staticProjects, timestamp: Date.now() };
 
 // Cache expiration time (in milliseconds)
 const CACHE_EXPIRATION = 10 * 60 * 1000; // 10 minutes
@@ -29,67 +53,11 @@ export default async function handler(
   const { search } = req.query;
 
   try {
-    // Check if cached data is still valid
-    const now = Date.now();
-    if (cache.data && now - cache.timestamp < CACHE_EXPIRATION) {
-      console.log('Serving data from cache');
-      return sendFilteredProjects(cache.data, search, res);
-    }
-
-    // Fetch data from GitHub API
-    const response = await fetch(
-      `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
-      {
-        headers: {
-          Authorization: `token ${GITHUB_TOKEN}`
-        }
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch repositories');
-    }
-
-    const data = await response.json();
-
-    // Fetch topics for each repository
-    const projectsWithTopics = await Promise.all(
-      data.map(async (repo: any) => {
-        const topicsResponse = await fetch(
-          `https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/topics`,
-          {
-            headers: {
-              Authorization: `token ${GITHUB_TOKEN}`,
-              Accept: 'application/vnd.github.v3+json'
-            }
-          }
-        );
-
-        const topicsData = await topicsResponse.json();
-        const topics = topicsData.names || [];
-
-        return {
-          id: repo.id.toString(),
-          title: repo.name,
-          des: repo.description || 'No description provided.',
-          category: repo.language ? repo.language.toLowerCase() : 'unknown',
-          repo: repo.html_url,
-          link: repo.homepage || repo.html_url,
-          topics
-        };
-      })
-    );
-
-    // Cache the fetched data
-    cache = {
-      data: projectsWithTopics,
-      timestamp: Date.now()
-    };
-
-    sendFilteredProjects(projectsWithTopics, search, res);
+    // Always serve from the static data
+    sendFilteredProjects(staticProjects, search, res);
   } catch (error) {
-    console.error('Error fetching GitHub repositories:', error);
-    res.status(500).json({ message: 'Error fetching repositories' });
+    console.error('Error handling projects:', error);
+    res.status(500).json({ message: 'Error fetching projects' });
   }
 }
 

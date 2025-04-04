@@ -1,9 +1,7 @@
 'use client';
 export function validateEnvVars() {
   const requiredEnvVars = [
-    'GITHUB_TOKEN',
-    'GITHUB_SECRET',
-    'GITHUB_ID',
+    // Removed GitHub tokens as they're no longer required
     'GEMINI_API_KEY'
   ];
 
@@ -26,9 +24,7 @@ export function validateEnvVars() {
 
 export function getEnvVars() {
   return {
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-    GITHUB_SECRET: process.env.GITHUB_SECRET,
-    GITHUB_ID: process.env.GITHUB_ID,
+    // Removed GitHub tokens
     GEMINI_API_KEY: process.env.GEMINI_API_KEY,
     HASHNODE_API_KEY: process.env.HASHNODE_API_KEY,
     HASHNODE_USERNAME: process.env.HASHNODE_USERNAME,

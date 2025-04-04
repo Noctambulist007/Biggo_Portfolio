@@ -22,15 +22,34 @@ interface Blog {
   pubDate?: string;
 }
 
-const BlogSection = () => {
+interface BlogSectionProps {
+  staticBlogs?: Blog[];
+}
+
+const BlogSection = ({ staticBlogs }: BlogSectionProps) => {
   const [blogSearch, setBlogSearch] = useState<string>(''); // Add search bar functionality
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [blogs, setBlogs] = useState<Blog[]>(staticBlogs || []);
+  const [isLoading, setIsLoading] = useState<boolean>(staticBlogs ? false : true);
   const [error, setError] = useState<string | null>(null);
 
   const pathname = usePathname();
 
   useEffect(() => {
+    // If static blogs are provided, filter them based on search
+    if (staticBlogs) {
+      const filteredBlogs = staticBlogs.filter((blog) => {
+        const searchLower = blogSearch.toLowerCase();
+        return (
+          blog.title.toLowerCase().includes(searchLower) ||
+          blog.contentSnippet.toLowerCase().includes(searchLower) ||
+          blog.categories.some((category) => category.toLowerCase().includes(searchLower))
+        );
+      });
+      setBlogs(filteredBlogs);
+      return;
+    }
+
+    // Otherwise fetch blogs from API
     const fetchBlogs = async () => {
       setIsLoading(true);
       setError(null);
@@ -54,7 +73,7 @@ const BlogSection = () => {
     };
 
     fetchBlogs();
-  }, [blogSearch, pathname]);
+  }, [blogSearch, pathname, staticBlogs]);
 
   return (
     <SectionContainer>
@@ -63,19 +82,9 @@ const BlogSection = () => {
 
         <AnimationContainer customClassName="w-full flex flex-col gap-5 mb-8">
           <p className="w-full text-base text-black dark:text-white">
-            These are some of the blog posts I've written since I started
-            blogging. Some of them are personal, technical articles, or insights
-            I've shared on various topics. If you want to see all my posts,
-            visit my{' '}
-            <Link
-              href={siteConfig.social.blog}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline transition-all ease"
-            >
-              Blog Page
-            </Link>
-            .
+            I write about my research work in machine learning and AI applications in healthcare, as well as mobile 
+            application development using Flutter. My blogs cover a range of topics from skin cancer classification to 
+            chronic kidney disease prediction and mobile app architecture.
           </p>
 
           {/* Use SearchInput component */}
