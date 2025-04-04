@@ -13,30 +13,56 @@ import {
 } from '@nextui-org/dropdown';
 
 const AuthAvatar = () => {
+  // Check if we're in static export mode
+  const isStaticExport = process.env.NEXT_PUBLIC_OUTPUT_MODE === 'export' || 
+                        typeof window !== 'undefined' && window.location.protocol === 'file:';
+  
+  // Always call useSession to follow React hooks rules
   const { data: session } = useSession();
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
   const [avatarUrl, setAvatarUrl] = useState<string>('');
 
   useEffect(() => {
-    if (session?.user?.image) {
+    if (!isStaticExport && session?.user?.image) {
       setIsSignedIn(true);
       setAvatarUrl(session.user.image); // Set avatar URL from session
     } else {
       setIsSignedIn(false);
       setAvatarUrl(''); // Fallback to empty string
     }
-  }, [session]);
+  }, [session, isStaticExport]);
 
   const handleSignIn = () => {
-    signIn('github'); // Trigger GitHub OAuth
+    if (!isStaticExport) {
+      signIn('github'); // Trigger GitHub OAuth
+    } else {
+      console.log('Authentication is disabled in static export mode');
+    }
   };
 
   const handleSignOut = () => {
-    signOut(); // Sign out the user
-    Cookies.remove('auth'); // Clear auth cookie
+    if (!isStaticExport) {
+      signOut(); // Sign out the user
+      Cookies.remove('auth'); // Clear auth cookie
+    }
     setIsSignedIn(false);
     setAvatarUrl(''); // Reset avatar URL
   };
+
+  // In static export mode, show a simplified button
+  if (isStaticExport) {
+    return (
+      <Button
+        color="primary"
+        className="cursor-pointer bg-black text-white dark:bg-white dark:text-black"
+        as="a"
+        href="https://github.com/Biggo111/portfolio" 
+        target="_blank"
+      >
+        GitHub
+      </Button>
+    );
+  }
 
   return (
     <>

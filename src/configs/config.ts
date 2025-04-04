@@ -32,9 +32,6 @@ export const siteConfig: {
     codsoft: string;
     github_snake: string;
   };
-  chatbot: {
-    rateLimit: number;
-  };
   contact: {
     debug: boolean;
     rateLimit: number;
@@ -79,11 +76,8 @@ export const siteConfig: {
       'Biggo Bushon Routh, Software Engineer, Mobile Development, Machine Learning, Deep Learning, Image Processing, Flutter, AI, Healthcare, EzyCourse, Intex Research Lab',
     type: 'website'
   },
-  chatbot: {
-    rateLimit: 10
-  },
   contact: {
-    debug: true,
+    debug: false,
     rateLimit: 10
   },
   other: {

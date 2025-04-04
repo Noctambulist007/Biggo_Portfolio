@@ -23,6 +23,10 @@ validateOptionalEnvVars();
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: 'export',  // Configure static exports
+  trailingSlash: true,
+  env: {
+    NEXT_PUBLIC_OUTPUT_MODE: 'export'
+  },
   images: {
     domains: ['localhost'],
     remotePatterns: [

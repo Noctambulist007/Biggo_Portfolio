@@ -14,13 +14,7 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from '../components/utils/themeContext';
 import ProgressBar from '@/src/components/ui/progress';
 import BackToTopButton from '@/src/components/ui/BackToTopButton';
-import dynamic from 'next/dynamic';
 import React from 'react';
-
-// Dynamically import the Chatbot component with ssr: false (render only client-side)
-const Chatbot = dynamic(() => import('@/src/components/ui/ChatBot'), {
-  ssr: false
-});
 
 const graphik = local({
   src: [
@@ -40,6 +34,19 @@ const graphik = local({
 });
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  // Check if we're in static export mode
+  const isStaticExport = process.env.NEXT_PUBLIC_OUTPUT_MODE === 'export' || 
+                        typeof window !== 'undefined' && window.location.protocol === 'file:';
+                        
+  // Conditionally wrap with SessionProvider if not in static export mode
+  const ContentWrapper = ({ children }: { children: React.ReactNode }) => {
+    return isStaticExport ? (
+      <>{children}</>
+    ) : (
+      <SessionProvider>{children}</SessionProvider>
+    );
+  };
+
   return (
     <html
       lang="en"
@@ -53,7 +60,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body className="transition ease-in-out min-h-screen">
         <HeroUIProvider>
           <ThemeProvider>
-            <SessionProvider>
+            <ContentWrapper>
               {/* Show progress bar during loading */}
               <ProgressBar />
 
@@ -67,10 +74,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 <Analytics />
               </main>
 
-              <Chatbot />
               <BackToTopButton />
               <Footer />
-            </SessionProvider>
+            </ContentWrapper>
           </ThemeProvider>
         </HeroUIProvider>
       </body>
